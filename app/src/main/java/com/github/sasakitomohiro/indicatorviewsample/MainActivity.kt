@@ -27,8 +27,10 @@ class MainActivity : AppCompatActivity() {
             binding.indicator.getSelectedCell()?.doOnLayout { cell ->
                 val constraintLayout = binding.root as ConstraintLayout
                 constraintLayout.addView(image)
-                image.y = binding.indicator.y + cell.height
-                image.x = cell.x
+                image.doOnLayout {
+                    image.y = binding.indicator.y + cell.height
+                    image.x = cell.x + (cell.width - image.width) / 2
+                }
             }
         }
     }
