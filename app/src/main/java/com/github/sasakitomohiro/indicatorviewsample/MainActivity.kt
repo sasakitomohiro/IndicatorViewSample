@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
                 constraintLayout.addView(image)
                 image.doOnLayout {
                     image.y = binding.indicator.y + cell.height
-                    image.x = cell.x + (cell.width - image.width) / 2
+                    image.x = binding.indicator.x + cell.x + (cell.width - image.width) / 2
                 }
             }
         }
