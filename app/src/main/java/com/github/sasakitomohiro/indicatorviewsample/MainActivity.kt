@@ -13,12 +13,14 @@ class MainActivity : AppCompatActivity() {
         DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        val image = ImageView(this).apply {
+    private val image by lazy {
+        ImageView(this).apply {
             setImageResource(R.drawable.triangle)
         }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
         binding.root.doOnLayout {
             binding.indicator.count = 8
@@ -32,6 +34,23 @@ class MainActivity : AppCompatActivity() {
                     image.x = binding.indicator.x + cell.x + (cell.width - image.width) / 2
                 }
             }
+        }
+
+        binding.prev.setOnClickListener {
+            binding.indicator.previous()
+            moveTriangle()
+        }
+
+        binding.next.setOnClickListener {
+            binding.indicator.next()
+            moveTriangle()
+        }
+    }
+
+    private fun moveTriangle() {
+        binding.indicator.getSelectedCell()?.let { cell ->
+            image.y = binding.indicator.y + cell.height
+            image.x = binding.indicator.x + cell.x + (cell.width - image.width) / 2
         }
     }
 }
