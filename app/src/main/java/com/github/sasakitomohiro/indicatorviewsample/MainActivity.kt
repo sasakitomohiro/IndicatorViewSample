@@ -23,7 +23,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding.root.doOnLayout {
-            binding.indicator.count = 8
+            binding.indicator.count = 9
+            binding.indicator.maxVisibleCount = 6
             binding.indicator.selectedIndex = 1
 
             binding.indicator.getSelectedCell()?.doOnLayout { cell ->
